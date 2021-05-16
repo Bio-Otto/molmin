@@ -4,7 +4,7 @@
 [![Powered by |Ozbek' Lab](https://github.com/Bio-Otto/Example_MD_Scripts/blob/master/PoweredByOzbekLab.png)](http://compbio.bioe.eng.marmara.edu.tr/)
 
 
-A Package for Protein Structures mutating and minimizing
+A Package for mutating and minimizing
 
 For terminal usage just use; 
 
