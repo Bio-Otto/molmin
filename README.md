@@ -1,10 +1,10 @@
 # molmin ![molmim v0.1 ff69b4](https://img.shields.io/badge/<molmim>-<v0.1>-<ff69b4>)
- Macro-Molecule mutater and minimizer
+ Macro-Molecule Mutater and Minimizer
 
 [![Powered by |Ozbek' Lab](https://github.com/Bio-Otto/Example_MD_Scripts/blob/master/PoweredByOzbekLab.png)](http://compbio.bioe.eng.marmara.edu.tr/)
 
 
-A Package for Mutating and Minimizing
+A package for mutating and minimizing
 
 For terminal usage just use; 
 
