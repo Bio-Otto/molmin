@@ -6,10 +6,16 @@
 
 A package for mutating and minimizing
 
-For terminal usage just use; 
+For production just type;
 
 ```sh
-$ python no_gui.py -p pdb_file -wdcd True -pert_res 'SER345' -speed_factor 4
+$ python minimizer.py -p <pdb file> -pff <amber96> -wff <tip3p> -mut <ASP-121-ASN> -mut_ch <A>
+```
+
+### Also you can check full functional parameters with typing 
+
+```sh
+$ python minimizer.py -h
 ```
 
 * __-p__  -->  Give the absolute path of your pdb file. 
@@ -17,7 +23,6 @@ $ python no_gui.py -p pdb_file -wdcd True -pert_res 'SER345' -speed_factor 4
 * __-wff__  -->  Water Forcefield (The program defaultly will use ```tip3p``` forcefield)
 * __-mut__  -->  The program will apply the mutation described as "target_residue-residue_number-desired_residue" (For example: ```-mut ASN-120-ASP```).
 * __-mut_ch__  -->  The program will mutate selected residue according to indicated chain ID.
-
 
 
 ## Then run it.
@@ -31,17 +36,7 @@ molmin uses a number of open source projects to work properly:
 
 And of course molmim v0.1 itself is open source with a [public repository][molmim] on GitHub.
 
-### Also you can check full functional parameters with typing 
 
-```sh
-$ python minimizer.py -h
-```
-
-For production just type...
-
-```sh
-$ python minimizer.py -p <pdb file> -pff <amber96> -wff <tip3p> -mut <ASP-121-ASN> -mut_ch <A>
-```
 
 The Program applying minimize and mutation according to yur choises using powerfull OpenMM Molecular Dynamic Toolkit, which also supports the Cuda platform. 
 
