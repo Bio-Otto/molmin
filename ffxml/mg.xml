@@ -1,0 +1,59 @@
+<ForceField>
+ <Info>
+  <DateGenerated>2016-04-11</DateGenerated>
+ </Info>
+ <AtomTypes>
+  <Type name="XZ" class="XZ" element="F" mass="18.305"/>
+  <Type name="Da" class="Da" element="H" mass="1.0"/>
+  <Type name="Db" class="Db" element="H" mass="1.0"/>
+  <Type name="Dc" class="Dc" element="H" mass="1.0"/>
+  <Type name="Dd" class="Dd" element="H" mass="1.0"/>
+  <Type name="De" class="De" element="H" mass="1.0"/>
+ </AtomTypes>
+ <Residues>
+  <Residue name="MMG">
+   <Atom name="XZ" type="XZ" charge="0.0"/>
+   <Atom name="D2" type="Db" charge="0.33"/>
+   <Atom name="D3" type="Dc" charge="0.33"/>
+   <Atom name="D4" type="Dd" charge="0.33"/>
+   <Atom name="D5" type="De" charge="0.34"/>
+   <Atom name="D6" type="De" charge="0.34"/>
+   <Atom name="D1" type="Da" charge="0.33"/>
+   <Bond atomName1="XZ" atomName2="D3"/>
+   <Bond atomName1="XZ" atomName2="D4"/>
+   <Bond atomName1="XZ" atomName2="D6"/>
+   <Bond atomName1="XZ" atomName2="D2"/>
+   <Bond atomName1="XZ" atomName2="D1"/>
+   <Bond atomName1="XZ" atomName2="D5"/>
+  </Residue>
+ </Residues>
+ <HarmonicBondForce>
+  <Bond type1="XZ" type2="Da" length="0.09" k="451872.0"/>
+  <Bond type1="XZ" type2="Db" length="0.09" k="451872.0"/>
+  <Bond type1="XZ" type2="Dc" length="0.09" k="451872.0"/>
+  <Bond type1="XZ" type2="Dd" length="0.09" k="451872.0"/>
+  <Bond type1="XZ" type2="De" length="0.09" k="451872.0"/>
+ </HarmonicBondForce>
+ <HarmonicAngleForce>
+  <Angle type1="Da" type2="XZ" type3="Db" angle="1.57079632679" k="460.24"/>
+  <Angle type1="Da" type2="XZ" type3="Dc" angle="3.14159265359" k="460.24"/>
+  <Angle type1="Da" type2="XZ" type3="Dd" angle="1.57079632679" k="460.24"/>
+  <Angle type1="Da" type2="XZ" type3="De" angle="1.57079632679" k="460.24"/>
+  <Angle type1="Db" type2="XZ" type3="Dc" angle="1.57079632679" k="460.24"/>
+  <Angle type1="Db" type2="XZ" type3="Dd" angle="3.14159265359" k="460.24"/>
+  <Angle type1="Db" type2="XZ" type3="De" angle="1.57079632679" k="460.24"/>
+  <Angle type1="Dc" type2="XZ" type3="Dd" angle="1.57079632679" k="460.24"/>
+  <Angle type1="Dc" type2="XZ" type3="De" angle="1.57079632679" k="460.24"/>
+  <Angle type1="Dd" type2="XZ" type3="De" angle="1.57079632679" k="460.24"/>
+  <Angle type1="De" type2="XZ" type3="De" angle="3.14159265359" k="460.24"/>
+ </HarmonicAngleForce>
+ <NonbondedForce coulomb14scale="0.833333333333" lj14scale="0.5">
+  <UseAttributeFromResidue name="charge"/>
+  <Atom type="XZ" sigma="0.117366997128" epsilon="111.6015056"/>
+  <Atom type="Da" sigma="0.089089871814" epsilon="0.01046"/>
+  <Atom type="Db" sigma="0.089089871814" epsilon="0.01046"/>
+  <Atom type="Dc" sigma="0.089089871814" epsilon="0.01046"/>
+  <Atom type="Dd" sigma="0.089089871814" epsilon="0.01046"/>
+  <Atom type="De" sigma="0.089089871814" epsilon="0.01046"/>
+ </NonbondedForce>
+</ForceField>
