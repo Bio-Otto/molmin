@@ -34,7 +34,7 @@ molmin uses a number of open source projects to work properly:
 * __OpenMM__ - A high performance toolkit for molecular simulation. 
 * __pdbfixer__ 
 
-And of course molmim v0.1 itself is open source with a [https://github.com/Bio-Otto/molmin][molmim] on GitHub.
+And of course molmim v0.1 is open source on GitHub.
 
 
 
