@@ -1,14 +1,12 @@
 ##########################################################################
 # IMPORTS
 import os
-
-import simtk
-from simtk.openmm import app
-import simtk.openmm as mm
-from simtk.unit import femtosecond, picosecond, nanometer, kelvin, angstrom, atmospheres
+import openmm as mm
+from openmm.unit import femtosecond, picosecond, nanometer, kelvin, angstrom, atmospheres
 from sys import stdout
 from apply_pdbfixer import fix_pdb
-from simtk.openmm import *
+from openmm import *
+
 
 
 class Classic_MD_Engine:
@@ -89,7 +87,7 @@ class Classic_MD_Engine:
         # modeller.topology.setUnitCellDimensions(box)
 
         print('Forcefield parameters loading to the simulation system ...')
-        forcefield = app.ForceField(self.protein_ff, self.water_ff, 'mg.xml')
+        forcefield = app.ForceField(self.protein_ff, self.water_ff) # 'mg.xml'
 
         print('Adding missing hydrogens to the model ...')
         modeller.addHydrogens(forcefield)

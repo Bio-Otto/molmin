@@ -1,10 +1,10 @@
 import sys
 from distutils.util import strtobool
 from Classic_MD import *
-from simtk import unit
+from openmm import unit
 from mut_and_fix import *
 
-from simtk.openmm import *
+from openmm import *
 import time
 
 if __name__ == '__main__':
@@ -44,30 +44,46 @@ if __name__ == '__main__':
     parser.add_argument('-mut_ch', '--mut_chain', nargs='?', type=str, default=None, required=False,
                         help='The program defaultly will mutate selected residue according to indicated chain')
 
+    parser.add_argument("--mutate_only", action="store_true",
+                        help="The program will perform mutation only")
+
     parsed = parser.parse_args()
     start_time = time.time()
 
     mut_file_path = None
-
     if parsed.mut_region and parsed.mut_chain is not None:
-        mut_file_path = mutate(pdb_path=parsed.topology, mut_region=parsed.mut_region, chain_id=parsed.mut_chain)
+        if parsed.mutate_only:
+            print("ONlY MUTATING")
+            mut_file_path = mutate(pdb_path=parsed.topology, mut_region=parsed.mut_region, chain_id=parsed.mut_chain)
+
+        elif not parsed.mutate_only:
+            mut_file_path = mutate(pdb_path=parsed.topology, mut_region=parsed.mut_region, chain_id=parsed.mut_chain)
+            Classic_MD_Engine(pdb_path=mut_file_path, protein_ff=parsed.protein_ff, water_ff=parsed.water_ff,
+                              total_Steps=parsed.long_md_total_step, temp=parsed.temperature,
+                              minimize_steps=parsed.minimize_step)
+
+    elif parsed.mut_region is not None and parsed.mut_chain is None:
+
+        if parsed.mutate_only:
+            print("ONlY MUTATING -- > to ALLL")
+            mut_file_path = mutate(pdb_path=parsed.topology, mut_region=parsed.mut_region, chain_id=None)
+
+        elif not parsed.mutate_only:
+            mut_file_path = mutate(pdb_path=parsed.topology, mut_region=parsed.mut_region, chain_id=None)
+            Classic_MD_Engine(pdb_path=mut_file_path, protein_ff=parsed.protein_ff, water_ff=parsed.water_ff,
+                              total_Steps=parsed.long_md_total_step, temp=parsed.temperature,
+                              minimize_steps=parsed.minimize_step)
 
     elif parsed.mut_region is None and parsed.mut_chain is None:
         print("No Mutation, just minimization applying")
+        Classic_MD_Engine(pdb_path=parsed.topology, protein_ff=parsed.protein_ff, water_ff=parsed.water_ff,
+                          total_Steps=parsed.long_md_total_step, temp=parsed.temperature, minimize=False,
+                          minimize_steps=parsed.minimize_step)
 
     else:
         print("You must specify mutation region and chain together !")
         sys.exit()
-
-    if mut_file_path is not None:
-        print("Mut file is loading")
-        Classic_MD_Engine(pdb_path=mut_file_path, protein_ff=parsed.protein_ff, water_ff=parsed.water_ff,
-                          total_Steps=parsed.long_md_total_step, temp=parsed.temperature,
-                          minimize_steps=parsed.minimize_step)
-    else:
-        Classic_MD_Engine(pdb_path=parsed.topology, protein_ff=parsed.protein_ff, water_ff=parsed.water_ff,
-                          total_Steps=parsed.long_md_total_step, temp=parsed.temperature,
-                          minimize_steps=parsed.minimize_step)
+    # -->
 
     print("\n--- %s seconds ---" % (time.time() - start_time))
     # ------------------------------------------------------------------------------------------------------------ #

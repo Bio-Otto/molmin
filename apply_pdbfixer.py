@@ -1,8 +1,8 @@
 from pdbfixer import PDBFixer
-from simtk.openmm.app.pdbfile import PDBFile
-from simtk.openmm import app
-import simtk.openmm.app.data
-import simtk.openmm.app.data.charmm36
+from openmm.app.pdbfile import PDBFile
+from openmm import app
+import openmm.app.data
+import openmm.app.data.charmm36
 from sys import stdout
 import parmed as pmd
 import numpy as np
