@@ -65,10 +65,11 @@ if __name__ == '__main__':
     elif parsed.mut_region is not None and parsed.mut_chain is None:
 
         if parsed.mutate_only:
-            print("ONlY MUTATING -- > to ALLL")
+            print("ONlY MUTATING -- > to ALL")
             mut_file_path = mutate(pdb_path=parsed.topology, mut_region=parsed.mut_region, chain_id=None)
 
         elif not parsed.mutate_only:
+            print("MUTATING AND MINIMIZING")
             mut_file_path = mutate(pdb_path=parsed.topology, mut_region=parsed.mut_region, chain_id=None)
             Classic_MD_Engine(pdb_path=mut_file_path, protein_ff=parsed.protein_ff, water_ff=parsed.water_ff,
                               total_Steps=parsed.long_md_total_step, temp=parsed.temperature,
