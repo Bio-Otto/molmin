@@ -37,7 +37,6 @@ def mutate(pdb_path, mut_region=None, chain_id=None):
     """
 
     try:
-        print(pdb_path, mut_region, chain_id)
         pdb_name = os.path.basename(pdb_path).split('.')[0]
         pdb_directory = os.path.dirname(pdb_path)
         mut_file_name = pdb_name + '_' + Res_Syn_ID[mut_region[0][0:3]] + mut_region[0].split('-')[1] + Res_Syn_ID[
@@ -48,15 +47,25 @@ def mutate(pdb_path, mut_region=None, chain_id=None):
         else:
             mut_file_path = os.path.join(pdb_directory, mut_file_name)
 
-        fixer = pdbfixer.PDBFixer(pdb_path + '.pdb')
+        try:
+            fixer = pdbfixer.PDBFixer(pdb_path + '.pdb')
+        except FileNotFoundError:
+            fixer = pdbfixer.PDBFixer(pdbid=os.path.splitext(os.path.basename(pdb_path))[0])
 
         if chain_id is None:
             chains = list(set([chain.id for chain in fixer.topology.chains()]))
-            print(chains)
+            print("While mutating the PDB ID {}, the program is searching for chain IDs {}".format(
+                os.path.splitext(os.path.basename(pdb_path))[0].upper(), chains))
             for _chain in chains:
-                fixer.applyMutations(mut_region, _chain)
+                try:
+                    fixer.applyMutations(mut_region, _chain)
+                except Exception as Chain_Error:
+                    pass
+                    #print(Chain_Error, "So, passing!")
 
         else:
+            print("While mutating the PDB ID {}, the program is searching for chain IDs {}".format(
+                os.path.splitext(os.path.basename(pdb_path))[0].upper(), chain_id))
             fixer.applyMutations(mut_region, chain_id)
 
         fixer.findMissingResidues()
@@ -69,7 +78,6 @@ def mutate(pdb_path, mut_region=None, chain_id=None):
         return mut_file_path
 
     except Exception as error:
-        print(error)
         exc_type, exc_obj, exc_tb = sys.exc_info()
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
         print(exc_type, fname, exc_tb.tb_lineno)
